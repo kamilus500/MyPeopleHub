@@ -23,6 +23,8 @@ namespace MyPeopleHub.Infrastructure.Extensions
             services.AddSingleton(authenticationSettings);
 
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IFriendshipService, FriendshipService>();
 
             services.AddScoped<ErrorHandlingMiddleware>();
 

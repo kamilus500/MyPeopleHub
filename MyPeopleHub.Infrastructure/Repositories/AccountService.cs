@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MyPeopleHub.Domain.Entities;
 using MyPeopleHub.Domain.Interfaces;
@@ -60,24 +59,18 @@ namespace MyPeopleHub.Infrastructure.Repositories
             return tokenHandler.WriteToken(token);
         }
 
-        public async Task<string> RegisterUser(RegisterUserDto dto)
+        public async Task<string> RegisterUser(User user)
         {
-            var newUser = new User()
-            {
-                Email = dto.Email,
-                LastName = dto.LastName,
-                FirstName = dto.FirstName,
-                Login = dto.Login,
-            };
+            user.Id = Guid.NewGuid().ToString();
 
-            var hashedPassword = PasswordHasher.Hash(dto.Password);
+            var hashedPassword = PasswordHasher.Hash(user.PasswordHashed);
 
-            newUser.PasswordHashed = hashedPassword;
+            user.PasswordHashed = hashedPassword;
 
-            await _dbContext.Users.AddAsync(newUser);
+            await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
 
-            return newUser.Id.ToString();
+            return user.Id;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using MyPeopleHub.Domain.Interfaces;
 
 namespace MyPeopleHub.Application.Account.Commands.AccountRegister
@@ -6,9 +7,11 @@ namespace MyPeopleHub.Application.Account.Commands.AccountRegister
     public class AccountRegisterCommandHandler : IRequestHandler<AccountRegisterCommand, string>
     {
         private readonly IAccountService _accountService;
-        public AccountRegisterCommandHandler(IAccountService accountService)
+        private readonly IMapper _mapper;
+        public AccountRegisterCommandHandler(IAccountService accountService, IMapper mapper)
         {
             _accountService = accountService;
+            _mapper = mapper;
         }
 
         public async Task<string> Handle(AccountRegisterCommand request, CancellationToken cancellationToken)
@@ -18,7 +21,11 @@ namespace MyPeopleHub.Application.Account.Commands.AccountRegister
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return await _accountService.RegisterUser(request);
+            var newUser = _mapper.Map<Domain.Entities.User>(request);
+
+            newUser.PasswordHashed = request.Password;
+
+            return await _accountService.RegisterUser(newUser);
         }
     }
 }
