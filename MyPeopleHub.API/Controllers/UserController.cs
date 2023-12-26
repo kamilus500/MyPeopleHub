@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MyPeopleHub.Application.User.Queries;
 using MyPeopleHub.Application.User.Queries.GetAllUsers;
 using MyPeopleHub.Application.User.Queries.GetUserById;
+using MyPeopleHub.Domain.Models.Dtos;
 
 namespace MyPeopleHub.API.Controllers
 {
@@ -12,9 +12,7 @@ namespace MyPeopleHub.API.Controllers
     {
         private readonly IMediator _mediator;
         public UserController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+            => _mediator = mediator;
 
         [HttpGet]
         [Route("/GetAllUsers")]

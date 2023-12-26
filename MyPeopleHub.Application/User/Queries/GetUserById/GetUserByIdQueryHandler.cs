@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using MyPeopleHub.Domain.Interfaces;
+using MyPeopleHub.Domain.Models.Dtos;
 
 namespace MyPeopleHub.Application.User.Queries.GetUserById
 {

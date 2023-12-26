@@ -1,4 +1,4 @@
-﻿namespace MyPeopleHub.Application.Account.Queries
+﻿namespace MyPeopleHub.Domain.Models.Dtos
 {
     public class LoginResponse
     {

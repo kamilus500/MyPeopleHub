@@ -14,11 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Friendship\Commands\" />
-    <Folder Include="Friendship\Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MyPeopleHub.Domain\MyPeopleHub.Domain.csproj" />
     <ProjectReference Include="..\MyPeopleHub.Infrastructure\MyPeopleHub.Infrastructure.csproj" />
   </ItemGroup>

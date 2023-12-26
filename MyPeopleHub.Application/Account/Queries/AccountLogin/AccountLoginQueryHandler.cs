@@ -1,15 +1,13 @@
 ﻿using MediatR;
 using MyPeopleHub.Domain.Interfaces;
+using MyPeopleHub.Domain.Models.Dtos;
 
 namespace MyPeopleHub.Application.Account.Queries.AccountLogin
 {
     public class AccountLoginQueryHandler : IRequestHandler<AccountLoginQuery, LoginResponse>
     {
         private readonly IAccountService _accountService;
-        public AccountLoginQueryHandler(IAccountService accountService)
-        {
-            _accountService = accountService;
-        }
+        public AccountLoginQueryHandler(IAccountService accountService) => _accountService = accountService;
 
         public async Task<LoginResponse> Handle(AccountLoginQuery request, CancellationToken cancellationToken)
         {

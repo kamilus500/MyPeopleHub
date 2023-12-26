@@ -16,6 +16,7 @@ namespace MyPeopleHub.Application.Extensions
             services.AddAutoMapper(cfg =>
             {
                 cfg.AddProfile<UserMappingProfile>();
+                cfg.AddProfile<FriendshipMappingProfile>();
             });
 
             services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AccountRegisterCommand>());

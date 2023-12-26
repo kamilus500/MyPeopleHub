@@ -1,4 +1,4 @@
-﻿namespace MyPeopleHub.Application.User.Queries
+﻿namespace MyPeopleHub.Domain.Models.Dtos
 {
     public class UserDto
     {

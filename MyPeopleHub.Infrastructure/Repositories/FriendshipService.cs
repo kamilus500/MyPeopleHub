@@ -25,11 +25,13 @@ namespace MyPeopleHub.Infrastructure.Repositories
         {
             var friendShips = await _dbContext.Friendships
                                         .Where(x => x.UserId == userId)
+                                        .Include(x => x.User)
+                                        .Include(x => x.Friend)
                                         .AsNoTracking()
                                         .ToListAsync();
 
             return friendShips
-                    .Select(x => x.User)
+                    .Select(x => x.Friend)
                     .ToList();
         }
     }
