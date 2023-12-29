@@ -40,14 +40,14 @@ namespace MyPeopleHub.Infrastructure.Extensions
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
                 {
-                    options.SaveToken = true;
+                    options.SaveToken = false;
                     options.RequireHttpsMetadata = false;
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ValidateIssuer = true,
                         ValidateAudience = true,
-                        ValidAudience = configuration[authenticationSettings.ValidAudience],
-                        ValidIssuer = configuration[authenticationSettings.ValidIssuer],
+                        ValidAudience = authenticationSettings.ValidAudience,
+                        ValidIssuer = authenticationSettings.ValidIssuer,
                         ClockSkew = TimeSpan.Zero,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.Secret))
                     };

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPeopleHub.Application.Friendship.Commands.CreateFrienship;
 using MyPeopleHub.Application.Friendship.Queries.GetAllFriendshipsForUser;
@@ -6,6 +7,7 @@ using MyPeopleHub.Domain.Models.Dtos;
 
 namespace MyPeopleHub.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FriendshipController : ControllerBase
