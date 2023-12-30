@@ -1,4 +1,4 @@
-#My People Hub
+# My People Hub
 
 - Simple application like 'mini facebook' where user can add new friends.
 
