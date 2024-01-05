@@ -1,18 +1,24 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Memory;
 using MyPeopleHub.Domain.Interfaces;
 using MyPeopleHub.Domain.Models.Dtos;
+using MyPeopleHub.Infrastructure.Repositories;
 
 namespace MyPeopleHub.Application.Friendship.Queries.GetAllFriendshipsForUser
 {
     public class GetAllFriendsForQueryHandler : IRequestHandler<GetAllFriendsForUserQuery, IEnumerable<UserDto>>
     {
         private readonly IFriendshipService _friendshipService;
+        private readonly IMemoryCache _memoryCache;
         private readonly IMapper _mapper;
-        public GetAllFriendsForQueryHandler(IFriendshipService friendshipService, IMapper mapper)
+
+        public string cacheKey = "AllFriendshipsFor";
+        public GetAllFriendsForQueryHandler(IFriendshipService friendshipService, IMapper mapper, IMemoryCache memoryCache)
         {
-            _friendshipService = friendshipService;
-            _mapper = mapper;
+            _friendshipService = friendshipService ?? throw new ArgumentNullException(nameof(friendshipService));
+            _memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<IEnumerable<UserDto>> Handle(GetAllFriendsForUserQuery request, CancellationToken cancellationToken)
@@ -22,9 +28,20 @@ namespace MyPeopleHub.Application.Friendship.Queries.GetAllFriendshipsForUser
                 throw new ArgumentNullException(nameof(request.UserId));
             }
 
-            var users = await _friendshipService.GetAllFriendshipsForUser(request.UserId);
+            cacheKey += $"-{request.UserId}";
 
-            return _mapper.Map<IEnumerable<UserDto>>(users);
+            IEnumerable<Domain.Entities.User> friends;
+
+            if (!_memoryCache.TryGetValue(cacheKey, out friends))
+            {
+                friends = await _friendshipService.GetAllFriendshipsForUser(request.UserId);
+
+                _memoryCache.Set(cacheKey, friends,
+                    new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(30)));
+            }
+
+            return _mapper.Map<IEnumerable<UserDto>>(friends);
         }
     }
 }

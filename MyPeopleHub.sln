@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPeopleHub.Infrastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPeopleHub.Application", "MyPeopleHub.Application\MyPeopleHub.Application.csproj", "{9ACA03B3-22AE-4891-8658-AA215171D870}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPeopleHub.API", "MyPeopleHub.API\MyPeopleHub.API.csproj", "{D0348410-5281-470C-A7EA-A359533AF89C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPeopleHub.API", "MyPeopleHub.API\MyPeopleHub.API.csproj", "{D0348410-5281-470C-A7EA-A359533AF89C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPeopleHub.UnitTests", "MyPeopleHub.UnitTests\MyPeopleHub.UnitTests.csproj", "{1D54C361-9EDE-4A2E-B9B2-8BC7C58F36C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D0348410-5281-470C-A7EA-A359533AF89C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0348410-5281-470C-A7EA-A359533AF89C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0348410-5281-470C-A7EA-A359533AF89C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D54C361-9EDE-4A2E-B9B2-8BC7C58F36C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D54C361-9EDE-4A2E-B9B2-8BC7C58F36C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D54C361-9EDE-4A2E-B9B2-8BC7C58F36C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D54C361-9EDE-4A2E-B9B2-8BC7C58F36C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

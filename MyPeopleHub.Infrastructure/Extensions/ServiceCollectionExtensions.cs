@@ -52,6 +52,8 @@ namespace MyPeopleHub.Infrastructure.Extensions
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.Secret))
                     };
                 });
+
+            services.AddMemoryCache();
         }
     }
 }
