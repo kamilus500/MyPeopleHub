@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPeopleHub.Application", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPeopleHub.API", "MyPeopleHub.API\MyPeopleHub.API.csproj", "{D0348410-5281-470C-A7EA-A359533AF89C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPeopleHub.UnitTests", "MyPeopleHub.UnitTests\MyPeopleHub.UnitTests.csproj", "{1D54C361-9EDE-4A2E-B9B2-8BC7C58F36C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPeopleHub.UnitTests", "MyPeopleHub.UnitTests\MyPeopleHub.UnitTests.csproj", "{1D54C361-9EDE-4A2E-B9B2-8BC7C58F36C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
