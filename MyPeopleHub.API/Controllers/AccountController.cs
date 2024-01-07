@@ -13,9 +13,7 @@ namespace MyPeopleHub.API.Controllers
         private readonly IMediator _mediator;
 
         public AccountController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+            => _mediator = mediator;
 
         [HttpPost]
         [Route("/register")]
