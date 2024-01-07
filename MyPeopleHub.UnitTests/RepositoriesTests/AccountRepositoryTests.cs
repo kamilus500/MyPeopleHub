@@ -1,11 +1,25 @@
-﻿using MyPeopleHub.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MyPeopleHub.Domain.Entities;
 using MyPeopleHub.Domain.Models.Configs;
+using MyPeopleHub.Domain.Models.Dtos;
+using MyPeopleHub.Infrastructure.Persistance;
 using MyPeopleHub.Infrastructure.Repositories;
 
 namespace MyPeopleHub.UnitTests.RepositoriesTests
 {
-    public class AccountRepositoryTests : BaseRepositoryTest
+    public class AccountRepositoryTests
     {
+        private readonly ApplicationDbContext dbContext;
+        public AccountRepositoryTests()
+        {
+            var _options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+
+            dbContext = new ApplicationDbContext(_options);
+            dbContext.SeedData();
+        }
+
         [Fact]
         public async Task RegisterNewUser()
         {
@@ -27,11 +41,34 @@ namespace MyPeopleHub.UnitTests.RepositoriesTests
                 Secret = "ecawiasqrpqrgyhwnolrudpbsrwaynbqdayndnmcehjnwqyouikpodzaqxivwkconwqbhrmxfgccbxbyljguwlxhdlcvxlutbnwjlgpfhjgqbegtbxbvwnacyqnltrby"
             };
 
-            var accountService = new AccountService(DbContext, authenticationSettings);
+            var accountService = new AccountService(dbContext, authenticationSettings);
+            string registerResponse = await accountService.RegisterUser(user);
 
-            var result = await accountService.RegisterUser(user);
+            Assert.NotNull(registerResponse);
+        }
 
-            Assert.NotNull(result);
+        [Fact]
+        public async Task GenerateJwt()
+        {
+            var loginDto = new LoginDto()
+            {
+                Login = "admin",
+                Password = "admin1"
+            };
+
+            var authenticationSettings = new AuthenticationSettings()
+            {
+                ValidAudience = "https://localhost:5001",
+                ValidIssuer = "https://localhost:5001",
+                TokenExpiryTimeInHour = 3,
+                Secret = "ecawiasqrpqrgyhwnolrudpbsrwaynbqdayndnmcehjnwqyouikpodzaqxivwkconwqbhrmxfgccbxbyljguwlxhdlcvxlutbnwjlgpfhjgqbegtbxbvwnacyqnltrby"
+            };
+
+            var accountService = new AccountService(dbContext, authenticationSettings);
+            var token = await accountService.GenerateJwt(loginDto);
+
+            Assert.NotNull(token);
+            Assert.NotEmpty(token);
         }
     }
 }
