@@ -54,6 +54,16 @@ namespace MyPeopleHub.Infrastructure.Extensions
                 });
 
             services.AddMemoryCache();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("applicationCors", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5000/")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                });
+            });
         }
     }
 }

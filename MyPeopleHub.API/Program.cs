@@ -28,4 +28,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseCors("applicationCors");
+
 app.Run();
