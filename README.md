@@ -4,4 +4,4 @@
 
 Tech stack:
 - API: NET 7
-- UI: Flask (Python)
+- UI: 
