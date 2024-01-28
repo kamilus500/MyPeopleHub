@@ -6,7 +6,6 @@ using MyPeopleHub.Domain.Models.Dtos;
 
 namespace MyPeopleHub.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -15,8 +14,7 @@ namespace MyPeopleHub.API.Controllers
         public AccountController(IMediator mediator)
             => _mediator = mediator;
 
-        [HttpPost]
-        [Route("/register")]
+        [HttpPost("/register")]
         public async Task<IActionResult> Register([FromBody] AccountRegisterCommand registerCommand)
         {
             var userId = await _mediator.Send(registerCommand);
@@ -24,8 +22,7 @@ namespace MyPeopleHub.API.Controllers
             return Created($"/register/{userId}", userId);
         }
 
-        [HttpPost]
-        [Route("/login")]
+        [HttpPost("/login")]
         public async Task<IActionResult> Login([FromBody]LoginDto loginDto)
         {
             var loginResponse = await _mediator.Send(new AccountLoginQuery()

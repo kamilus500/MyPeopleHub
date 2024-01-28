@@ -7,5 +7,7 @@ namespace MyPeopleHub.Domain.Interfaces
         Task<User> GetUserById(string id);
 
         Task<IEnumerable<User>> GetAllUsers();
+
+        Task<User> UpdateUserCount(string userId);
     }
 }

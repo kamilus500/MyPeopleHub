@@ -59,7 +59,7 @@ namespace MyPeopleHub.Infrastructure.Extensions
             {
                 options.AddPolicy("applicationCors", policy =>
                 {
-                    policy.WithOrigins("http://localhost:5000/")
+                    policy.AllowAnyOrigin()
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                 });

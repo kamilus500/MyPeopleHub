@@ -21,6 +21,9 @@ namespace MyPeopleHub.Application.Account.Commands.AccountRegister
 
             RuleFor(x => x.LastName)
                 .NotEmpty().WithMessage("Empty last name");
+
+            RuleFor(x => x.Image)
+                .Null();
         }
     }
 }

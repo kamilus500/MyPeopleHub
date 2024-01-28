@@ -18,5 +18,19 @@ namespace MyPeopleHub.Infrastructure.Repositories
 
         public async Task<User> GetUserById(string id)
             => await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id.Equals(id));
+
+        public async Task<User> UpdateUserCount(string userId)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            user.CountOfFriends += 1;
+
+            await _dbContext.SaveChangesAsync();
+
+            return user;
+        }
     }
 }

@@ -8,13 +8,15 @@ namespace MyPeopleHub.Application.Friendship.Commands.CreateFrienship
     {
         private readonly IFriendshipService _friendshipService;
         private readonly IMapper _mapper;
-        public CreateFriendshipCommandHandler(IFriendshipService friendshipService, IMapper mapper)
+        private readonly IUserService _userService;
+        public CreateFriendshipCommandHandler(IFriendshipService friendshipService, IMapper mapper, IUserService userService)
         {
             _friendshipService = friendshipService;
             _mapper = mapper;
+            _userService = userService;
         }
 
-        public Task<string> Handle(CreateFrienshipCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateFrienshipCommand request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(request.FriendId))
             {
@@ -28,7 +30,15 @@ namespace MyPeopleHub.Application.Friendship.Commands.CreateFrienship
 
             var friendship = _mapper.Map<Domain.Entities.Friendship>(request);
 
-            return _friendshipService.CreateFriendship(friendship);
+            var friendshipId = await _friendshipService.CreateFriendship(friendship);
+
+            if (friendshipId != null)
+            {
+                await _userService.UpdateUserCount(request.UserId);
+                await _userService.UpdateUserCount(request.FriendId);
+            }            
+
+            return friendshipId;
         }
     }
 }
