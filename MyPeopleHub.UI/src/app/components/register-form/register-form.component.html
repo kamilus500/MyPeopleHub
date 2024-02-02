@@ -1,0 +1,42 @@
+<div class="register-container">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-lock"></i>
+            </span>
+            <input type="text" formControlName="firstName" pInputText placeholder="FirstName">
+        </div>
+
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-lock"></i>
+            </span>
+            <input type="text" formControlName="lastName" pInputText placeholder="LastName">
+        </div>
+
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-lock"></i>
+            </span>
+            <input type="email" formControlName="email" pInputText placeholder="Email">
+        </div>
+
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <input type="text" formControlName="login" pInputText placeholder="Login">
+        </div>
+
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-lock"></i>
+            </span>
+            <input type="password" formControlName="password" pPassword placeholder="Password">
+        </div>
+
+        <p-fileUpload mode="basic" chooseLabel="Choose" formControlName="image" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" [maxFileSize]="1000000" (onSelect)="onFileSelect($event)" ></p-fileUpload>
+
+        <button type="submit" pButton label="Register" [disabled]="!registerForm.valid"></button>
+    </form>
+  </div>

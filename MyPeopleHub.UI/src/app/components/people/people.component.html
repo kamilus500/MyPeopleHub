@@ -1,0 +1,19 @@
+<div class="user-container">
+    <div class="user-grid">
+        @for (user of users$ | async; track user.email) {
+            <div class="user-card">
+                <p-card header="{{user.firstName}} {{user.lastName}}">
+                    <ng-template pTemplate="header">
+                        <img src="../../../assets/avatar.jpg"/>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <p-button size="small" label="Add friend"></p-button>
+                        <p-button size="small" label="Show profile"></p-button>
+                    </ng-template>
+                </p-card>
+            </div>
+        } @empty {
+            <p>Empty list of users</p>
+        }
+    </div>
+</div>
