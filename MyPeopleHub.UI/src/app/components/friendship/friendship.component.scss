@@ -1,0 +1,13 @@
+.friend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 20rem));
+    gap: 1rem;
+
+    margin: 0 auto;
+}
+
+.friend-card {
+    p-button {
+        padding: 0.7rem;
+    }
+}

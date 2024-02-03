@@ -1,1 +1,19 @@
-<p>friendship works!</p>
+<div class="friend-container">
+    <h4>Your friends</h4>
+    <div class="friend-grid">
+        @for (user of friends$ | async; track user.email) {
+            <div class="friend-card">
+                <p-card header="{{user.firstName}} {{user.lastName}}">
+                    <ng-template pTemplate="header">
+                        <img src="../../../assets/avatar.jpg"/>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <p-button size="small" label="Show profile"></p-button>
+                    </ng-template>
+                </p-card>
+            </div>
+        } @empty {
+            <p>Empty list of users</p>
+        }
+    </div>
+</div>

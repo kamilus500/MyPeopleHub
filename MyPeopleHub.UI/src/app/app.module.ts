@@ -26,6 +26,7 @@ import { TokenInterceptor } from './tokenInterceptor';
 import { JwtDecryptionService } from './services/jwt-decryption.service';
 import { AccountDataService } from './services/data-services/account-data.service';
 import { CardModule } from 'primeng/card';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CardModule } from 'primeng/card';
     NavbarComponent,
     PeopleComponent,
     FriendshipComponent,
-    AccountComponent
+    AccountComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

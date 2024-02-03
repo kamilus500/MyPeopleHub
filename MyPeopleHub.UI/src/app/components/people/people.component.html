@@ -7,8 +7,8 @@
                         <img src="../../../assets/avatar.jpg"/>
                     </ng-template>
                     <ng-template pTemplate="footer">
-                        <p-button size="small" label="Add friend"></p-button>
-                        <p-button size="small" label="Show profile"></p-button>
+                        <p-button size="small" label="Add friend" (click)="addFriend(user.id)"></p-button>
+                        <p-button size="small" label="Show profile" (click)="showProfile(user.id)"></p-button>
                     </ng-template>
                 </p-card>
             </div>

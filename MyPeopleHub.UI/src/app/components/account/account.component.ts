@@ -3,6 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { AccountDataService } from '../../services/data-services/account-data.service';
 import { Observable } from 'rxjs';
 import { AccountService } from '../../services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -15,7 +16,7 @@ export class AccountComponent {
   fullName$: Observable<string | null> = this.dataAccountService.fullName$;
   loginStatus$: Observable<boolean> = this.dataAccountService.loginStatus$;
   
-  constructor(private accountService: AccountService, private dataAccountService: AccountDataService) {
+  constructor(private accountService: AccountService, private dataAccountService: AccountDataService, private router: Router) {
 
     this.authItems = [
       {
@@ -33,5 +34,6 @@ export class AccountComponent {
 
   logout(): void {
     this.accountService.logout();
+    this.router.navigate(['/']);
   }
 }
