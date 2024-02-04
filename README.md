@@ -4,4 +4,4 @@
 
 Tech stack:
 - API: NET 7 (EF CORE, CQRS)
-- UI: 
+- UI: Angular (NgPrime, RxJs)
