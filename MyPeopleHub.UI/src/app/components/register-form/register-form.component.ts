@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
-import { TokenService } from '../../services/token.service';
 import { Router } from '@angular/router';
-import { RegisterDto } from '../../models/RegisterDto';
-import { UploadEvent } from 'primeng/fileupload';
-import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register-form',
@@ -22,13 +18,13 @@ export class RegisterFormComponent {
       email: ['', [Validators.email, Validators.required]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      image: [null, Validators.nullValidator]
+      image: [null]
     })
   }
 
   onSubmit() {
-    const registerDto: RegisterDto = this.registerForm.value;
-
+    const registerDto = this.registerForm.value;
+    
     if (registerDto !== undefined || registerDto !== null) {
       this.accountService.register(registerDto)
         .subscribe((response: string) => {

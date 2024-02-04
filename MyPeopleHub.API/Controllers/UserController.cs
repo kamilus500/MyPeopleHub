@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPeopleHub.Application.User.Queries.GetAllUsers;
 using MyPeopleHub.Application.User.Queries.GetUserById;
-using MyPeopleHub.Domain.Models.Dtos;
 
 namespace MyPeopleHub.API.Controllers
 {
@@ -18,12 +17,23 @@ namespace MyPeopleHub.API.Controllers
 
         [HttpGet]
         [Route("/GetAllUsers")]
-        public async Task<IEnumerable<UserDto>> GetAllUsers()
-            => await _mediator.Send(new GetAllUsersQuery());
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _mediator.Send(new GetAllUsersQuery());
+
+            return Ok(users);
+        }
 
         [HttpGet]
         [Route("/GetUserById/{userId}")]
-        public async Task<UserDto> GetUserById(string userId)
-            => await _mediator.Send(new GetUserByIdQuery(userId));
+        public async Task<IActionResult> GetUserById(string userId)
+        {
+            var user = await _mediator.Send(new GetUserByIdQuery(userId));
+
+            if (user is null)
+                return NotFound($"Not found user with id: {userId}");
+
+            return Ok(user);
+        }
     }
 }

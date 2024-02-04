@@ -37,5 +37,7 @@ export class FriendshipDataService {
         };
 
         this.friendsService.createFriend(newFriendship)
+            .subscribe((friendshipId) => {
+            });
     }
 }

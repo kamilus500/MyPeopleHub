@@ -7,5 +7,6 @@
         public string LastName { get; set; } = default!;
         public string Email { get; set; } = default!;
         public string Login { get; set; } = default!;
+        public int CountOfFriends { get; set; }
     }
 }

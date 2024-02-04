@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, forwardRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +15,7 @@ import { TokenService } from './services/token.service';
 import { UserService } from './services/user.service';
 import { FriendsService } from './services/friends.service';
 import { AccountService } from './services/account.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -65,6 +65,11 @@ import { UserComponent } from './components/user/user.component';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => RegisterFormComponent)
     }
   ],
   bootstrap: [AppComponent]
