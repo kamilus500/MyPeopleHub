@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, filter } from 'rxjs';
 import { UserDto } from '../../models/UserDto';
 import { UserService } from '../user.service';
+import { TokenService } from '../token.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserDataService {
-
     users$: BehaviorSubject<UserDto[]> = new BehaviorSubject<UserDto[]>([]);
     userById$: BehaviorSubject<UserDto | null> = new BehaviorSubject<UserDto | null>(null);
 
-    constructor(private userService: UserService) {
-        
+    actuallUserId: string | null = null;
+
+    constructor(private userService: UserService, private tokenService: TokenService) {
+        this.actuallUserId = this.tokenService.getUserId();
     }
 
     getAllUsers(): Observable<UserDto[]> {
@@ -22,7 +24,7 @@ export class UserDataService {
     loadAllUsers(): void {
         this.userService.getAllUser()
             .subscribe(users => {
-                this.users$.next(users);
+                this.users$.next(users.filter(u => u.id !== this.actuallUserId));
             })
     }
 

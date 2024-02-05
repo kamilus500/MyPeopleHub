@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDto } from '../../models/UserDto';
 import { UserDataService } from '../../services/data-services/user-data.service';
-import { Observable } from 'rxjs';
+import { Observable, filter } from 'rxjs';
 import { FriendshipDataService } from '../../services/data-services/friendship-data.service';
 import { Router } from '@angular/router';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-people',
@@ -13,9 +14,10 @@ import { Router } from '@angular/router';
 export class PeopleComponent implements OnInit {
 
   users$: Observable<UserDto[]> = this.userDataService.getAllUsers();
+  loggedUserId: string;
 
-  constructor(private userDataService: UserDataService, private friendDataService: FriendshipDataService, private router: Router) {
-    
+  constructor(private userDataService: UserDataService, private friendDataService: FriendshipDataService, private router: Router, private tokenService: TokenService) {
+    this.loggedUserId = this.tokenService.getUserId() as string;
   }
 
   ngOnInit(): void {
