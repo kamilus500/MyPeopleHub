@@ -32,11 +32,7 @@ namespace MyPeopleHub.Application.Friendship.Commands.CreateFrienship
 
             var friendshipId = await _friendshipService.CreateFriendship(friendship);
 
-            if (friendshipId != null)
-            {
-                await _userService.UpdateUserCount(request.UserId);
-                await _userService.UpdateUserCount(request.FriendId);
-            }            
+            await _userService.UpdateUserCount(request.UserId);
 
             return friendshipId;
         }

@@ -14,7 +14,7 @@ namespace MyPeopleHub.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<User>> GetAllUsers()
-            => await _dbContext.Users.AsNoTracking().ToListAsync();
+            => await _dbContext.Users.Include(x => x.Friendships).AsNoTracking().ToListAsync();
 
         public async Task<User> GetUserById(string id)
             => await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id.Equals(id));

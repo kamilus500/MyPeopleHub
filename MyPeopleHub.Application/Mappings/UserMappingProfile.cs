@@ -1,6 +1,4 @@
-﻿
-using AutoMapper;
-using MyPeopleHub.Application.User.Queries;
+﻿using AutoMapper;
 using MyPeopleHub.Domain.Models.Dtos;
 
 namespace MyPeopleHub.Application.Mappings
@@ -9,7 +7,8 @@ namespace MyPeopleHub.Application.Mappings
     {
         public UserMappingProfile()
         {
-            CreateMap<Domain.Entities.User, UserDto>();
+            CreateMap<Domain.Entities.User, UserDto>()
+                .ForMember(u => u.FriendIds, src => src.MapFrom(u => u.Friendships.Select(f => f.FriendId)));
 
             CreateMap<RegisterUserDto, Domain.Entities.User>();
 
