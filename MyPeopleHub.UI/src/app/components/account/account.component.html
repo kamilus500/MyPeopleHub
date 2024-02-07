@@ -3,7 +3,7 @@
     <p-avatar size="xlarge" shape="circle" icon="pi pi-user" class="avatar"></p-avatar>
     <div class="user-details">
       <span class="user-name">{{fullName$ | async}}</span>
-      <p-button class="config-button" size="small" (click)="logout()">Logout</p-button>
+      <p-button class="logout" size="small" (click)="logout()">Logout</p-button>
     </div>
   } @else {
     <p-menubar [model]="authItems"></p-menubar>
