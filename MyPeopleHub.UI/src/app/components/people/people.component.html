@@ -1,6 +1,12 @@
+<div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+        <i class="pi pi-search"></i>
+    </span>
+    <input type="text" pInputText [(ngModel)]="searchedText" (ngModelChange)="onModelChange($event)" />
+</div>
 <div class="user-container">
     <div class="user-grid">
-        @for (user of users$ | async; track user.email) {
+        @for (user of users; track user.email) {
             <div class="user-card">
                 <p-card header="{{user.firstName}} {{user.lastName}}">
                     <ng-template pTemplate="header">

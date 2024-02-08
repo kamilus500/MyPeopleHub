@@ -4,6 +4,7 @@ export interface UserDto {
     lastName: string;
     email: string;
     login: string;
+    fullName: string;
     countOfFriends: number;
     friendIds: string[];
 }

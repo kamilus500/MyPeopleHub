@@ -7,6 +7,7 @@
         public string LastName { get; set; } = default!;
         public string Email { get; set; } = default!;
         public string Login { get; set; } = default!;
+        public string FullName { get; set; }
         public List<string> FriendIds { get; set; }
         public int CountOfFriends { get; set; }
     }

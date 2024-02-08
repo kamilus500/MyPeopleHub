@@ -1,2 +1,8 @@
 <app-account></app-account>
-<p-menubar [model]="items"></p-menubar>
+<ul class="navbar-list">
+    @for (item of items; track item.label) {
+        <li class='item-list' routerLink="{{item.routerLink}}">
+            {{ item.label }}
+        </li>
+    }
+</ul>
