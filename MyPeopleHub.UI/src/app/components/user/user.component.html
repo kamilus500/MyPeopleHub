@@ -1,7 +1,7 @@
 <div class="user-info">
-    <p-avatar [image]="" size="large"></p-avatar>
-    <div class="user-details">
-      <h2>{{ user?.firstName }} {{ user?.lastName }}</h2>
-      <p>{{user?.countOfFriends}} friends</p>
-    </div>
+  <p-avatar [image]="" size="large"></p-avatar>
+  <div class="user-details">
+    <h2>{{ (user$ | async)?.firstName  }} {{ (user$ | async)?.lastName }}</h2>
+    <p>{{(user$ | async)?.countOfFriends}} friends</p>
   </div>
+</div>
