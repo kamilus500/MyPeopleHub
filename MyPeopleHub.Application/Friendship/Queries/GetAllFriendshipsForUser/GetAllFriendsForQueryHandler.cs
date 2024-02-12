@@ -27,18 +27,19 @@ namespace MyPeopleHub.Application.Friendship.Queries.GetAllFriendshipsForUser
             {
                 throw new ArgumentNullException(nameof(request.UserId));
             }
-
+            
             cacheKey += $"-{request.UserId}";
 
             IEnumerable<Domain.Entities.User> friends;
 
             if (!_memoryCache.TryGetValue(cacheKey, out friends))
             {
+
                 friends = await _friendshipService.GetAllFriendshipsForUser(request.UserId);
 
                 _memoryCache.Set(cacheKey, friends,
                     new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(30)));
+                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(3)));
             }
 
             return _mapper.Map<IEnumerable<UserDto>>(friends);

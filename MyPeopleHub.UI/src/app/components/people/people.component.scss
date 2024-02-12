@@ -1,16 +1,17 @@
-.p-inputgroup {
-    width: 20rem;
-    padding: 1rem 0 1rem 0;
-}
-
 .user-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, auto));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 20em));
+    gap: 0.5rem;
 }
 
 .user-card {
+    
     p-button {
         padding: 0.7rem;
     }
+}
+
+.p-inputgroup {
+    width: 20rem;
+    padding: 1rem 0 1rem 0;
 }

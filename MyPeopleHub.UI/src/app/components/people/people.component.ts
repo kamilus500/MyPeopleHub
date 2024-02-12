@@ -37,7 +37,10 @@ export class PeopleComponent implements OnInit {
 
   addFriend(friendId: string): void {
     this.friendDataService.createFriendship(friendId);
-    this.router.navigate(['/friends']);
+
+    setTimeout(() => {
+      this.router.navigate(['/friends']);
+    }, 2000);
   }
 
   showProfile(userId: string): void {

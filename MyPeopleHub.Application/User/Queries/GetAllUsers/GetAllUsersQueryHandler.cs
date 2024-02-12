@@ -36,7 +36,7 @@ namespace MyPeopleHub.Application.User.Queries.GetAllUsers
 
                 _memoryCache.Set(cacheKey, users,
                     new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(5)));
+                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(3)));
             }
 
             return _mapper.Map<IEnumerable<UserDto>>(users);

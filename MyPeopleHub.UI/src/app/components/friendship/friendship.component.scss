@@ -1,7 +1,7 @@
 .friend-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, auto));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 20em));
+    gap: 0.5rem;
 }
 
 .friend-card {
