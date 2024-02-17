@@ -4,6 +4,7 @@ import { UserDto } from '../../models/UserDto';
 import { FriendsService } from '../friends.service';
 import { TokenService } from '../token.service';
 import { CreateFriendship } from '../../models/CreateFriendship';
+import { PropertyEnum } from '../../enums/PropertyEnum';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class FriendshipDataService {
     }
 
     loadAllUsers(): void {
-        let userId = this.tokenService.getUserId();
+        let userId = this.tokenService.getUserProperty(PropertyEnum.UserId);
         this.friendsService.getAllFriends(userId!)
             .subscribe(users => {
                 this.friends$.next(users);
@@ -29,7 +30,7 @@ export class FriendshipDataService {
     }
 
     createFriendship(friendId: string) {
-        let userId = this.tokenService.getUserId();
+        let userId = this.tokenService.getUserProperty(PropertyEnum.UserId);
 
         let newFriendship: CreateFriendship = {
             userId: userId as string,

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterFormComponent {
   registerForm: FormGroup;
-
+  selectedFile: File | null = null;
   constructor(private accountService: AccountService, private fb: FormBuilder, private router: Router) {
     this.registerForm = this.fb.group({
       login: ['', Validators.required],
@@ -18,7 +18,7 @@ export class RegisterFormComponent {
       email: ['', [Validators.email, Validators.required]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      image: [null]
+      image: [null, Validators.nullValidator]
     })
   }
 
@@ -35,9 +35,8 @@ export class RegisterFormComponent {
     }
   }
 
-  onFileSelect(event: any) {
-    this.registerForm.patchValue({
-      profileImage: event.files[0]
-    })
+  onFileSelect(event: Event) {
+    // this.selectedFile = event.target.files[0];
+    // console.log(this.selectedFile);
   }
 }

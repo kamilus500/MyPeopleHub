@@ -1,6 +1,7 @@
 import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { TokenService } from './services/token.service';
 import { AccountDataService } from './services/data-services/account-data.service';
+import { PropertyEnum } from './enums/PropertyEnum';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let fullName = this.tokenService.getFullName()
-    let userId = this.tokenService.getUserId();
+    let fullName = this.tokenService.getUserProperty(PropertyEnum.Fullname);
+    let userId = this.tokenService.getUserProperty(PropertyEnum.UserId);
 
     this.accountDataService.setFullName(fullName);
     this.accountDataService.setUserId(userId);

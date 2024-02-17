@@ -35,7 +35,7 @@
             <input type="password" formControlName="password" pPassword placeholder="Password">
         </div>
 
-        <p-fileUpload mode="basic" chooseLabel="Choose avatar" formControlName="image" (onSelect)="onFileSelect($event)" ></p-fileUpload>
+        <input type="file" formControlName="image" (onSelect)="onFileSelect($event)" />
 
         <button type="submit" pButton label="Register" [disabled]="!registerForm.valid"></button>
     </form>

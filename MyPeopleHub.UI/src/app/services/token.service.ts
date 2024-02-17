@@ -3,6 +3,7 @@ import * as CryptoJS from 'crypto-js'
 import { jwtDecode } from 'jwt-decode';
 import { CustomJwtPayload } from '../models/CustomJwtPayload';
 import { JwtDecryptionService } from './jwt-decryption.service';
+import { PropertyEnum } from '../enums/PropertyEnum';
 
 @Injectable({
   providedIn: 'root'
@@ -29,28 +30,20 @@ export class TokenService {
     return null;
   }
 
-  getFullName(): string | null {
+  getUserProperty(property: PropertyEnum): string | null {
     const encryptedValue = localStorage.getItem(this.TOKEN_KEY);
 
     if(encryptedValue) {
       let decryptedValue = this.jwtDecodeService.decrypt(encryptedValue);
 
       let decoded = jwtDecode<CustomJwtPayload>(decryptedValue);
-      return decoded.FullName;
-    }
-
-    return null;
-  }
-
-  getUserId(): string | null {
-    const encryptedValue = localStorage.getItem(this.TOKEN_KEY);
-
-    if(encryptedValue) {
-      let decryptedValue = this.jwtDecodeService.decrypt(encryptedValue);
       
-      let decoded = jwtDecode<CustomJwtPayload>(decryptedValue);
-
-      return decoded.UserId;
+      switch(property) {
+        case PropertyEnum.Fullname:
+          return decoded.FullName;
+        case PropertyEnum.UserId:
+          return decoded.UserId;
+      }
     }
 
     return null;

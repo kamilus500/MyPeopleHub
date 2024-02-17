@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, filter } from 'rxjs';
 import { UserDto } from '../../models/UserDto';
 import { UserService } from '../user.service';
 import { TokenService } from '../token.service';
+import { PropertyEnum } from '../../enums/PropertyEnum';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserDataService {
     actuallUserId: string | null = null;
 
     constructor(private userService: UserService, private tokenService: TokenService) {
-        this.actuallUserId = this.tokenService.getUserId();
+        this.actuallUserId = this.tokenService.getUserProperty(PropertyEnum.UserId);
     }
 
     getAllUsers(): Observable<UserDto[]> {

@@ -5,6 +5,7 @@ import { Observable, filter, map } from 'rxjs';
 import { FriendshipDataService } from '../../services/data-services/friendship-data.service';
 import { Router } from '@angular/router';
 import { TokenService } from '../../services/token.service';
+import { PropertyEnum } from '../../enums/PropertyEnum';
 
 @Component({
   selector: 'app-people',
@@ -19,7 +20,7 @@ export class PeopleComponent implements OnInit {
   searchedText: string = '';
 
   constructor(private userDataService: UserDataService, private friendDataService: FriendshipDataService, private router: Router, private tokenService: TokenService) {
-    this.loggedUserId = this.tokenService.getUserId() as string;
+    this.loggedUserId = this.tokenService.getUserProperty(PropertyEnum.UserId) as string;
     this.userDataService.loadAllUsers();
   }
 

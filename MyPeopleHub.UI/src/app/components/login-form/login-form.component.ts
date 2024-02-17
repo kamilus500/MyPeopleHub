@@ -7,6 +7,7 @@ import { LoginResponse } from '../../models/LoginResponse';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AccountDataService } from '../../services/data-services/account-data.service';
+import { PropertyEnum } from '../../enums/PropertyEnum';
 
 @Component({
   selector: 'app-login-form',
@@ -38,8 +39,8 @@ export class LoginFormComponent {
           if (response.token) {
             this.tokenService.setToken(response.token);
             
-            let fullName = this.tokenService.getFullName();
-            let userId = this.tokenService.getUserId();
+            let fullName = this.tokenService.getUserProperty(PropertyEnum.Fullname);
+            let userId = this.tokenService.getUserProperty(PropertyEnum.UserId);
 
             this.accountDataService.setFullName(fullName);
             this.accountDataService.setUserId(userId);
